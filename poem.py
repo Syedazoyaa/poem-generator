@@ -10,24 +10,38 @@ chat = model.start_chat(history=[])
 
 def get_gemini_response(user_input):
     try:
-        question = f"Write a poem about {user_input}.. generate it in the form of stanzas to visually make it look as poem an also give the heading as ' A POEM ON {user_input}'"
+        question = f"Write a poem about {user_input}.. generate it in the form of stanzas to visually make it look as poem and also give the heading as ' A POEM ON {user_input}'"
         response = chat.send_message(question, stream=True)
         return response
     except Exception as e:
         st.error(f"Error: {e}")
 
+def set_background_image(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded_image = base64.b64encode(image_file.read()).decode()
+    page_bg_img = f'''
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{encoded_image}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # Initialize Streamlit app
 st.set_page_config(page_title="poem.AI")
 st.header("POEM.AI")
 
-# Add custom CSS for background image and fancy elements
+# Set the background image
+set_background_image("poembg.png")  # Ensure the image is in the same directory as the app
+
+# Add custom CSS for fancy elements
 st.markdown(
     """
     <style>
-    .stApp {
-        background: url('poembg.png');
-        background-size: cover;
-    }
     .stTextInput > div > div > input {
         border: 2px solid #00ADB5;
         border-radius: 10px;
