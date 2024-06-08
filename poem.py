@@ -34,3 +34,14 @@ if submit and user_input:
         st.error("Failed to get a response. Please try again later.")
 elif submit and not user_input:
     st.warning("Please input a topic before submitting.")
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background: url('poembg.png');
+        background-size: cover;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
