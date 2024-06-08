@@ -18,7 +18,7 @@ def get_gemini_response(user_input):
 
 # Initialize Streamlit app
 st.set_page_config(page_title="poem.AI")
-st.header("WRITER.AI")
+st.header("POEM.AI")
 
 # User input for the content topic
 user_input = st.text_input("Enter a topic for your poem:", key="user_input")
